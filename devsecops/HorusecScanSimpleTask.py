@@ -84,7 +84,5 @@ def main() -> None:
                            output_file, total_scannned_files)
 
 
-# if __name__ == "__main__":
-#    main()
-
-print(sys.argv[0])
+if __name__ == "__main__":
+    main()
