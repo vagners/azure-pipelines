@@ -1,21 +1,5 @@
 # Horusec
 
-## O que é o Horusec?
-O Horusec é uma ferramenta open source que orquestra outras ferramentas de segurança e identifica falhas de segurança ou vulnerabilidades em projetos, centralizando todos os resultados em um banco de dados para análise e geração de métricas.
-
-## Como o Horusec funciona? 
-O Horusec faz uma análise SAST do seu projeto a partir da observação de padrões no código.
-
-## Por que usar o Horusec?[](https://docs.horusec.io/docs/pt-br/overview/#por-que-usar-o-horusec)
-
-- **Promove a cultura do desenvolvimento seguro aplicando a lógica de “security by design”**
-
-Ele traz para você segurança, garantindo que possíveis vulnerabilidades desconhecidas serão encontradas pela análise do Horusec.
-
-- **Melhora a sua experiência**
-
-Garante a segurança dos projetos no processo de CI e CD e, assim, reduz os custos de correção de uma vulnerabilidade.
-
 Mais informações:
 [https://docs.horusec.io/docs/pt-br/overview/](https://docs.horusec.io/docs/pt-br/overview/)
 
