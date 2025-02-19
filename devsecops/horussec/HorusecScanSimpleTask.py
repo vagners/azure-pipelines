@@ -52,7 +52,7 @@ def scan_directory(source_directory, horusec_output_file) -> int:
     print(command)
     os.system(command)
 
-    command = 'horusec start -i ' + \
+    command = 'horusec start -D -i ' + \
         sys.argv[0]+' -p "'+source_directory + \
         '" -o="json" -O="'+horusec_output_file+'"'
     print(command)
