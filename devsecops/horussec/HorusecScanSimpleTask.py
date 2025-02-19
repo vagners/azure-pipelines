@@ -11,7 +11,8 @@ def convert_horusec_output(input_file, output_file, total_scannned_files) -> Non
     with open(input_file) as horusecOutputFile:
         d = j.load(horusecOutputFile)
 
-    analysisVulnerabilities = d["analysisVulnerabilities"]
+    # Se não houver vulnerabilidades, defina como lista vazia
+    analysisVulnerabilities = d.get("analysisVulnerabilities") or []
     totalTests = len(analysisVulnerabilities)
 
     testsuites = e.Element("testsuites")
@@ -25,8 +26,6 @@ def convert_horusec_output(input_file, output_file, total_scannned_files) -> Non
     id = 0
     for item in analysisVulnerabilities:
         testsuite = e.SubElement(testsuites, "testsuite")
-        #testsuite.set('failures', "1")
-        #testsuite.set('tests', "1")
         testsuite.set('id', str(id))
         testsuite.set('name', item['vulnerabilities']['file'])
         testsuite.set('timestamp', item['createdAt'])
@@ -38,14 +37,16 @@ def convert_horusec_output(input_file, output_file, total_scannned_files) -> Non
 
         failure = e.SubElement(testcase, "failure")
         failure.set('message', item['vulnerabilities']['details'])
-        failure.text = 'Line: ' + item['vulnerabilities']['line'] + '\n' + 'Column: ' + item['vulnerabilities']['column'] + '\n' + 'Confidence: ' + \
-            item['vulnerabilities']['confidence'] + '\n' + 'File: ' + \
-            item['vulnerabilities']['file'] + '\n' + \
-            'Code: ' + item['vulnerabilities']['code']
+        failure.text = (
+            'Line: ' + item['vulnerabilities']['line'] + '\n'
+            + 'Column: ' + item['vulnerabilities']['column'] + '\n'
+            + 'Confidence: ' + item['vulnerabilities']['confidence'] + '\n'
+            + 'File: ' + item['vulnerabilities']['file'] + '\n'
+            + 'Code: ' + item['vulnerabilities']['code']
+        )
 
     xml = e.ElementTree(testsuites)
     xml.write(output_file)
-
 
 def scan_directory(source_directory, horusec_output_file) -> int:
     command = 'curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest'
